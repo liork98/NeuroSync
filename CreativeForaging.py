@@ -311,6 +311,8 @@ while not endTrial:
             drw_units()
             drw_gallery()
             win.flip()
+            if not release:
+                startTime = clock.getTime()
             release = True
             
         if release:
@@ -327,7 +329,8 @@ while not endTrial:
             'condition': condition,
             'phase': phase,
             'type': 'moveblock',
-            'time': clock.getTime(),
+            'start_time': startTime,
+            'end_time': clock.getTime(),
             'unit': target['number'],
             'end_position': snap,
             'all_positions': positions,
