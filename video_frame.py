@@ -33,9 +33,14 @@ def extract_frame_at_time(video_path, time_sec, output_dir):
 
 # Example usage:
 
-df = pd.read_csv('999 (2025-04-15 09-19-14).csv', delimiter=';')
-times = df['time'].tolist()
-print(times)
+df = pd.read_csv('999 (2025-05-06 19-21-38).csv', delimiter=';')
+time_frames = []
+start_times = df['start_time'].tolist()
+end_times = df['end_time'].tolist()
+for start, end in zip(start_times, end_times):
+    time_frames.append((float(start) + float(end)) / 2)
 
-for time in times:
-    extract_frame_at_time('screen view.MOV', time, 'frames')
+print(time_frames)
+
+# for time in time_frames:
+#     extract_frame_at_time('screen view.MOV', time, 'frames')
