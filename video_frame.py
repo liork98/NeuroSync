@@ -1,3 +1,5 @@
+import math
+
 import cv2
 import os
 import pandas as pd
@@ -33,7 +35,7 @@ def extract_frame_at_time(video_path, time_sec, output_dir):
 
 # Example usage:
 
-df = pd.read_csv('999 (2025-05-06 19-21-38).csv', delimiter=';')
+df = pd.read_csv('999 (2025-05-15 14-47-47).csv', delimiter=';')
 time_frames = []
 start_times = df['start_time'].tolist()
 end_times = df['end_time'].tolist()
@@ -42,5 +44,10 @@ for start, end in zip(start_times, end_times):
 
 print(time_frames)
 
+
+for time in time_frames:
+    if not math.isnan(time):
+        extract_frame_at_time('full_example_video.mp4', time, 'frames')
+
 # for time in time_frames:
-#     extract_frame_at_time('screen view.MOV', time, 'frames')
+#     extract_frame_at_time('full_example_video.mp4', time, 'frames')
