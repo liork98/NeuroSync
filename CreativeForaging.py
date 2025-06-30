@@ -49,8 +49,8 @@ clock = core.Clock()
 date = data.getDateStr()  
 
 # gallery
-frame = visual.Rect(win, width=0.3, height=0.2, pos = [0.55, 0.35], fillColor = 'white')
-gallery = visual.ImageStim(win, image = 'default.png', pos = [0.55, 0.35], size = [0.3, 0.2]) 
+frame = visual.Rect(win, width=0.32, height=0.22, pos = [0.55, 0.35], fillColor = 'white')
+gallery = visual.ImageStim(win, image = 'default.png', pos = [0.55, 0.35], size = [0.3, 0.2])
 
 # initial positions
 pos = [[-0.315, 0.0], [-0.245,0.0], [-0.175,0.0], [-0.105,0.0], [-0.035,0.0], [0.035,0.0], [0.105,0.0], [0.175,0.0], [0.245,0.0], [0.315, 0.0]]
