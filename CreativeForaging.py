@@ -7,6 +7,8 @@
 from psychopy import visual, core, event, gui, data
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 from psychopy.visual import ShapeStim
 from scipy import spatial
 from scipy.spatial.distance import cdist
@@ -49,8 +51,8 @@ clock = core.Clock()
 date = data.getDateStr()  
 
 # gallery
-frame = visual.Rect(win, width=0.32, height=0.22, pos = [0.55, 0.35], fillColor = 'white')
-gallery = visual.ImageStim(win, image = 'default.png', pos = [0.55, 0.35], size = [0.3, 0.2])
+frame = visual.Rect(win, width=0.32, height=0.22, pos = [0, 0.35], fillColor = 'white')
+gallery = visual.ImageStim(win, image = 'default.png', pos = [0, 0.35], size = [0.3, 0.2])
 
 # initial positions
 pos = [[-0.315, 0.0], [-0.245,0.0], [-0.175,0.0], [-0.105,0.0], [-0.035,0.0], [0.035,0.0], [0.105,0.0], [0.175,0.0], [0.245,0.0], [0.315, 0.0]]
@@ -232,7 +234,63 @@ def reset_positions(figure):
         
     return fig_update
     
-    
+def draw_and_save_squares_zoomed_centered_fixed_canvas(
+    coords, square_size=0.07, canvas_size=10, margin=0.2, output_file='output.png'):
+    """
+    Draws green squares centered and zoomed within a fixed-size canvas, then saves it.
+
+    Args:
+    coords (list of tuples): List of (x, y) centered around (0, 0).
+    square_size (float): Width/height of each square.
+    canvas_size (float): Fixed size of canvas (both width and height).
+    margin (float): Padding around squares to avoid edge clipping (in canvas units).
+    output_file (str): Filename for saving the image.
+    """
+    fig, ax = plt.subplots(figsize=(5, 5), dpi=100)
+    fig.patch.set_facecolor('black')
+    ax.set_facecolor('black')
+
+    # Shift coordinates to [0, 1] range
+    shifted_coords = [(x + 0.5, y + 0.5) for x, y in coords]
+
+    # Compute bounding box of shifted squares
+    xs, ys = zip(*shifted_coords)
+    min_x, max_x = min(xs), max(xs)
+    min_y, max_y = min(ys), max(ys)
+
+    # Compute center of squares
+    center_x = (min_x + max_x + square_size) / 2
+    center_y = (min_y + max_y + square_size) / 2
+
+    # Scale shifted coordinates to canvas units centered at (canvas_size/2, canvas_size/2)
+    final_coords = [
+    (
+    (x - center_x) * canvas_size + (canvas_size / 2),
+    (y - center_y) * canvas_size + (canvas_size / 2)
+    )
+    for x, y in shifted_coords
+    ]
+
+    # Set fixed canvas limits with margin
+    ax.set_xlim(0, canvas_size)
+    ax.set_ylim(0, canvas_size)
+    ax.set_aspect('equal')
+
+    # Draw the squares
+    for (x, y) in final_coords:
+        square = patches.Rectangle(
+        (x, y), square_size * canvas_size, square_size * canvas_size,
+        linewidth=1,
+        edgecolor='black',
+        facecolor='green'
+        )
+        ax.add_patch(square)
+
+    plt.axis('off')
+    plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
+    plt.savefig(output_file, dpi=300, bbox_inches='tight', pad_inches=0, facecolor='black')
+    plt.close()
+
 def save_to_gallery(positions, subject, gallery_number, date):
     
     pos_norm = reset_positions(positions)
@@ -255,9 +313,10 @@ def save_to_gallery(positions, subject, gallery_number, date):
     filename = 'gallery_{}_{}_{}.png'.format(subject, gallery_number, date)
     drw_units()
     win.flip()
-    win.getMovieFrame()
-    win.saveMovieFrames(screen_shot_path + filename)
-    
+    #win.getMovieFrame()
+    #win.saveMovieFrames(screen_shot_path + filename)
+    draw_and_save_squares_zoomed_centered_fixed_canvas(positions,output_file=screen_shot_path + filename)
+
     gallery.image = (screen_shot_path + filename)
 
     
