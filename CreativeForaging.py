@@ -68,6 +68,8 @@ for i in range(10):
         'pos': pos[i]}]
 
 welcome = '''
+תרגול משחק
+
 Welcome to the creative game!
 
 Your task is to move around blocks to create interesting and beautiful figures.

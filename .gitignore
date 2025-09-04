@@ -1,2 +1,6 @@
 venv/
 logfiles/
+.idea/
+DS_Store/
+.venv/
+logfiles
