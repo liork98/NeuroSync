@@ -35,7 +35,8 @@ def create_subtitles(player_left, player_right,
     df = df.dropna(subset=["start_time", "end_time"])
     df["text"] = df["answer"].map({
         "left": f"{player_left}'s Turn",
-        "right": f"{player_right}'s Turn"
+        "right": f"{player_right}'s Turn",
+        "neither": "Can't recognize action"
     })
     df = df.sort_values(by="start_time").reset_index(drop=True)
 
