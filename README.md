@@ -17,9 +17,6 @@ This project was developed as part of our final B.Sc. project in Computer Scienc
 
 The system supports an experimental game designed to study cognitive synchronization through interactive tasks.
 
-https://www.projects.mta.ac.il/projects/neurosync
-
-https://www.canva.com/design/DAGn0viQrWM/bR75Y06mr8wqnBSphkIf6A/edit?utm_content=DAGn0viQrWM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 ---
 
 ## 🎮 Overview
