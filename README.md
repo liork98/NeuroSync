@@ -64,6 +64,9 @@ By analyzing the **shapes created during gameplay** and correlating them with pl
 ---
 
 ## 🚀 Getting Started
+### ⚙️ Install required dependencies
+Make sure to install all the necessary libraries before running the system.
+
 To run the system locally:  
 
 ### Step 1 – Clone the repository
@@ -78,10 +81,4 @@ Open the file \`create_logs_table_3.py\` and insert your OpenAI API key in the d
 ### Step 3 – Run the pipeline  
 \`\`\`bash
 python run_pipeline.py
-\`\`\`
-
-### ⚙️ Install required dependencies
-Make sure to install all the necessary libraries before running the system:  
-\`\`\`bash
-pip install -r requirements.txt
 \`\`\`
