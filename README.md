@@ -64,10 +64,24 @@ By analyzing the **shapes created during gameplay** and correlating them with pl
 ---
 
 ## 🚀 Getting Started
+To run the system locally:  
 
-To run the system locally:
-
-1. Clone the repository:
-```bash
+### Step 1 – Clone the repository
+\`\`\`bash
 git clone https://github.com/liork98/NeuroSync.git
 cd NeuroSync
+\`\`\`
+
+### Step 2 – Add your OpenAI API key  
+Open the file \`create_logs_table_3.py\` and insert your OpenAI API key in the designated section.  
+
+### Step 3 – Run the pipeline  
+\`\`\`bash
+python run_pipeline.py
+\`\`\`
+
+### ⚙️ Install required dependencies
+Make sure to install all the necessary libraries before running the system:  
+\`\`\`bash
+pip install -r requirements.txt
+\`\`\`
